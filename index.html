@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Analog IC design engineer making complex engineering simple, one visual at a time. Silicon Art, latest videos and links.">
+<meta name="theme-color" content="#0B1220">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andrés Harding">
+<meta property="og:description" content="Analog IC design engineer making complex engineering simple, one visual at a time. Silicon Art, latest videos and links.">
+<meta property="og:url" content="https://jessehardingmurillo.github.io/">
+<meta property="og:image" content="https://jessehardingmurillo.github.io/preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1220'/%3E%3Cpath d='M14 46 L22 18 L30 46 M17.5 36 H42 M34 18 V46 M50 18 V46 M34 32 H50' stroke='%23F5F7FA' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='34' cy='36' r='4' fill='%2322D3EE'/%3E%3C/svg%3E">
+<title>Andrés Harding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: a single quiet column, like a page from a lab notebook. Name in drafting-hand lettering,
+     one featured video, plain text links, and a dot-matrix MOSFET at the foot where electrons flow. */
+  :root {
+    --bg: #0B1220;
+    --ink: #E8EEF6;
+    --soft: #8C99AD;
+    --accent: #22D3EE;
+    --line: #1E2A3D;
+    --thumb-bg: #0E1628;
+    --dot-dim: rgba(140, 153, 173, 0.55);
+    --pattern: rgba(34, 211, 238, 0.17);
+    --hand: "Architects Daughter", "Comic Neue", "Segoe Print", cursive;
+    --body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F6F7F4; --ink: #17306B; --soft: #5A6A86; --accent: #0E7490; --line: #DCE2EA;
+      --thumb-bg: #0B1220; --dot-dim: rgba(23, 48, 107, 0.45); --pattern: rgba(23, 48, 107, 0.13); color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #F6F7F4; --ink: #17306B; --soft: #5A6A86; --accent: #0E7490; --line: #DCE2EA;
+    --thumb-bg: #0B1220; --dot-dim: rgba(23, 48, 107, 0.45); --pattern: rgba(23, 48, 107, 0.13); color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  a { color: inherit; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+  .page { max-width: 640px; margin: 0 auto; padding-block: 28px 32px; display: flex; flex-direction: column; align-items: center; gap: 0; text-align: center; }
+
+  nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; font-size: 15px; }
+  nav a { text-decoration: none; color: var(--ink); padding-bottom: 3px; border-bottom: 1px solid transparent; }
+  nav a:hover, nav a[aria-current="page"] { border-bottom-color: var(--accent); }
+
+  h1 { font-family: var(--hand); font-weight: 400; font-size: clamp(40px, 9vw, 54px); line-height: 1.1; margin: 56px 0 0; letter-spacing: 0.01em; }
+  h1 .dot { color: var(--accent); }
+  .intro { margin: 14px 0 0; font-size: 17px; max-width: 30ch; text-wrap: balance; color: var(--ink); }
+
+  .latest { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; }
+  .thumb { width: 220px; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: var(--thumb-bg);
+           box-shadow: 0 0 0 1px var(--line); transition: transform .25s ease, box-shadow .25s ease; display: block; }
+  .latest:hover .thumb, .latest:focus-visible .thumb { transform: translateY(-3px) rotate(-0.6deg); box-shadow: 0 0 0 1px var(--accent); }
+  .thumb svg { width: 100%; height: 100%; display: block; }
+  .latest .cap { font-size: 14px; color: var(--ink); }
+  .latest .cap span { color: var(--soft); }
+
+  .social { margin-top: 30px; display: flex; gap: 14px 24px; flex-wrap: wrap; justify-content: center; font-size: 15px; }
+  .social a { text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .social a svg { color: var(--accent); flex: none; transition: transform .2s ease; }
+  .social a:hover svg { transform: translateY(-2px); }
+  .social a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+
+  .stage { margin-top: 34px; width: 100%; max-width: 520px; position: relative; }
+  canvas { width: 100%; height: auto; display: block; cursor: crosshair; }
+  .stage .legend { font-family: var(--mono); font-size: 11px; color: var(--soft); margin-top: 4px; letter-spacing: 0.04em; }
+
+  .foot { width: 100%; max-width: 1100px; margin: 26px auto 0; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; }
+  .foot .right { display: flex; gap: 18px; }
+  .foot button { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; }
+  .foot button:hover, .foot a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+  .foot a { text-decoration: none; }
+
+  /* Silicon Art archive (second view, reached from the nav) */
+  .archive { width: 100%; max-width: 520px; margin: 40px auto 0; text-align: left; }
+  .archive h2 { font-family: var(--hand); font-weight: 400; font-size: 30px; margin: 0 0 6px; text-align: center; }
+  .archive p.sub { text-align: center; color: var(--soft); margin: 0 0 18px; font-size: 15px; }
+  .archive ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .archive li a { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; padding: 12px 2px; border-bottom: 1px solid var(--line); text-decoration: none; align-items: baseline; }
+  .archive li a:hover .t { text-decoration: underline; text-decoration-color: var(--accent); }
+  .archive .n { font-family: var(--mono); color: var(--soft); font-variant-numeric: tabular-nums; font-size: 14px; }
+  .archive .t { min-width: 0; }
+  .archive .m { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+
+  .about { width: 100%; max-width: 520px; margin: 40px auto 0; text-align: left; }
+  .about h2 { font-family: var(--hand); font-weight: 400; font-size: 30px; margin: 0 0 12px; text-align: center; }
+  .about p { margin: 0 0 12px; }
+  .about .note { color: var(--soft); font-size: 14px; }
+
+  /* Background: a faint sheet of schematic symbols, clear in the middle so the text stays clean */
+  .bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; color: var(--pattern);
+        -webkit-mask-image: radial-gradient(ellipse 48% 58% at 50% 42%, transparent 0%, rgba(0,0,0,0.25) 55%, #000 100%);
+                mask-image: radial-gradient(ellipse 48% 58% at 50% 42%, transparent 0%, rgba(0,0,0,0.25) 55%, #000 100%); }
+  .page, .foot { position: relative; z-index: 1; }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) { .thumb { transition: none; } }
+</style>
+</head>
+<body>
+
+
+<svg class="bg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="schem" width="380" height="380" patternUnits="userSpaceOnUse" patternTransform="rotate(-6)">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <!-- op-amp with feedback resistor -->
+        <path d="M40 40 L40 120 L112 80 Z"/>
+        <path d="M14 58 H40 M14 102 H40 M47 58 H55 M47 102 H55 M51 98 V106 M112 80 H140"/>
+        <path d="M126 80 V18 H98 l-4 -7 l-8 14 l-8 -14 l-8 14 l-8 -14 l-4 7 H26 V58"/>
+        <!-- resistor -->
+        <path d="M190 62 H206 l5 -9 l10 18 l10 -18 l10 18 l10 -18 l5 9 H282"/>
+        <!-- ground -->
+        <path d="M330 28 V58 M314 58 H346 M320 66 H340 M326 74 H334"/>
+        <!-- capacitor -->
+        <path d="M70 176 V202 M52 202 H88 M52 212 H88 M70 212 V240"/>
+        <!-- NMOS -->
+        <path d="M150 220 H174 M174 198 V242 M184 192 V248 M184 200 H210 V172 M184 240 H210 V266 M196 240 L188 234 M196 240 L188 246"/>
+        <!-- diode -->
+        <path d="M262 214 H286 M286 200 L286 228 L310 214 Z M310 200 V228 M310 214 H340"/>
+        <!-- inductor -->
+        <path d="M12 320 H28 a9 9 0 0 1 18 0 a9 9 0 0 1 18 0 a9 9 0 0 1 18 0 a9 9 0 0 1 18 0 H116"/>
+        <!-- small op-amp (comparator) -->
+        <path d="M170 286 L170 346 L222 316 Z M150 300 H170 M150 332 H170 M175 300 H182 M175 332 H182 M178.5 328.5 V335.5 M222 316 H250 V360"/>
+        <!-- current source -->
+        <circle cx="318" cy="318" r="16"/><path d="M318 286 V302 M318 334 V352 M318 310 V326 M312 320 L318 326 L324 320"/>
+        <!-- ground under capacitor -->
+        <path d="M70 240 V250 M58 250 H82 M62 256 H78 M67 262 H73"/>
+      </g>
+      <g fill="currentColor"><circle cx="126" cy="80" r="3"/><circle cx="250" cy="316" r="0"/><circle cx="210" cy="172" r="2.6"/></g>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#schem)"/>
+</svg>
+<canvas class="bg" id="traces" aria-hidden="true"></canvas>
+<div class="page">
+  <nav aria-label="Main">
+    <a href="#home" data-view="home" aria-current="page">home</a>
+    <a href="#silicon-art" data-view="silicon-art">silicon art</a>
+    <a href="#about" data-view="about">about</a>
+  </nav>
+
+  <section id="view-home">
+    <h1>hi, I'm Andrés<span class="dot">.</span></h1>
+    <p class="intro">an analog chip designer who makes complex engineering simple, one visual at a time.</p>
+
+    <a class="latest" id="latest" href="#" target="_blank" rel="noopener">
+      <span class="thumb" id="thumb"></span>
+      <span class="cap"><span id="latest-series"></span> <b id="latest-title" style="font-weight:500"></b> ↗</span>
+    </a>
+
+    <div class="social" id="social"></div>
+  </section>
+
+  <section id="view-silicon-art" class="archive" hidden>
+    <h2>silicon art</h2>
+    <p class="sub">how chips work, one concept at a time</p>
+    <ol id="archive"></ol>
+  </section>
+
+  <section id="view-about" class="about" hidden>
+    <h2>about</h2>
+    <p>I'm an analog circuit design engineer in Costa Rica, finishing my Licenciatura in Electronic Engineering at Universidad Técnica Nacional.</p>
+    <p>I make Silicon Art: short visual explanations of transistors, circuits and chips. I also share what it's like to learn, work and build a career in analog design.</p>
+  </section>
+
+  <div class="stage" aria-label="Animated dot drawing of a MOSFET cross-section with electrons flowing from source to drain">
+    <canvas id="fet" width="1040" height="420"></canvas>
+    <div class="legend" id="legend">V<sub>GS</sub> &gt; V<sub>TH</sub> · electrons flowing source → drain</div>
+  </div>
+</div>
+
+<div class="foot">
+  <a href="https://www.linkedin.com/in/andres-harding-abb258199/" target="_blank" rel="noopener">say hello</a>
+  <div class="right">
+    <button type="button" id="gate">turn gate off</button>
+    <button type="button" id="pause">pause animation</button>
+  </div>
+</div>
+
+<script>
+  // ---- Updated by Claude each time a new video is published. ----
+  const LATEST = {
+    series: "Silicon Art #7 ·",
+    title: "the CMOS inverter",
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7512717959061020672/",
+    art: "inverter"
+  };
+  const ICON = {
+    linkedin: '<path d="M7 10.5V17M11 17v-6.5M11 13.4c0-1.7 1.2-2.9 2.8-2.9s2.7 1.1 2.7 3V17"/><circle cx="7" cy="7.4" r="1.25" fill="currentColor" stroke="none"/><rect x="2.5" y="2.5" width="19" height="19" rx="4"/>',
+    youtube: '<rect x="2" y="5" width="20" height="14" rx="4.5"/><path d="M10 9.2 15.2 12 10 14.8Z" fill="currentColor"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/>',
+    github: '<circle cx="6.5" cy="5.5" r="2.2"/><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="8" r="2.2"/><path d="M6.5 7.7v8.6M17.5 10.2c0 4.3-8.6 3.2-10.4 6.3"/>'
+  };
+  const SOCIAL = [
+    ["LinkedIn", "linkedin", "https://www.linkedin.com/in/andres-harding-abb258199/"],
+    ["YouTube", "youtube", "https://www.youtube.com/@Im_AndresH"],
+    ["Instagram", "instagram", "https://www.instagram.com/im_andresh/"],
+    ["GitHub", "github", "https://github.com/JesseHardingMurillo"]
+  ];
+  const ARCHIVE = [
+    ["#7", "The CMOS Inverter", "", "https://www.linkedin.com/feed/update/urn:li:activity:7512717959061020672/"],
+    ["#6", "Understanding MOSFET Operating Regions", "most watched", "https://www.linkedin.com/feed/update/urn:li:activity:7511650862704873472/"],
+    ["#5", "MOSFET: The Invention That Changed the World", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
+    ["#4", "Moore's Law", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
+    ["#3", "Inside an IC: FEOL, MOL & BEOL", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
+    ["#2", "From Sand to IC", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
+    ["#1", "What is a PDK?", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"]
+  ];
+  // ----------------------------------------------------------------
+
+  const THUMBS = {
+    inverter: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="320" height="180" fill="#0B1220"/>
+      <g stroke="#F5F7FA" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(72,12) scale(0.62)">
+        <path d="M250 30 H350"/>
+        <path d="M280 58 V102 M264 62 V98 M280 66 H300 V30 M280 94 H300 V130"/>
+        <path d="M280 158 V202 M264 162 V198 M280 166 H300 V130 M280 194 H300 V230"/>
+        <path d="M250 230 H350"/>
+        <path d="M253 80 H230 V180 H264 M150 130 H230"/>
+        <path d="M300 130 H380" stroke="#22D3EE"/>
+      </g>
+      <text x="18" y="70" fill="#F5F7FA" font-family="DM Sans, sans-serif" font-weight="500" font-size="26">the CMOS</text>
+      <text x="18" y="102" fill="#22D3EE" font-family="Architects Daughter, cursive" font-size="32">inverter</text>
+      <text x="18" y="156" fill="#8C99AD" font-family="JetBrains Mono, monospace" font-size="12">SILICON ART #7</text>
+    </svg>`
+  };
+
+  const $ = (id) => document.getElementById(id);
+  $("latest").href = LATEST.url;
+  $("latest-series").textContent = LATEST.series;
+  $("latest-title").textContent = LATEST.title;
+  $("thumb").innerHTML = THUMBS[LATEST.art] || THUMBS.inverter;
+  $("social").innerHTML = SOCIAL.map(([n, k, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg><span>${n}</span></a>`).join("");
+  $("archive").innerHTML = ARCHIVE.map(([n, t, m, u]) =>
+    `<li><a href="${u}" target="_blank" rel="noopener"><span class="n">${n}</span><span class="t">${t}</span><span class="m">${m}</span></a></li>`).join("");
+
+  // ---- Views (home / silicon art / about), linkable with #silicon-art and #about ----
+  const views = ["home", "silicon-art", "about"];
+  function show(v) {
+    if (!views.includes(v)) v = "home";
+    views.forEach(x => { $("view-" + x).hidden = x !== v; });
+    document.querySelectorAll("nav a").forEach(a => {
+      if (a.dataset.view === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+  }
+  document.querySelectorAll("nav a").forEach(a => a.addEventListener("click", e => { e.preventDefault(); show(a.dataset.view); }));
+  show((location.hash || "#home").slice(1));
+
+  // ---- Dot-matrix MOSFET with electrons flowing through the channel ----
+  const cv = $("fet"), ctx = cv.getContext("2d");
+  const W = cv.width, H = cv.height, S = 8; // dot pitch in canvas px
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  let colInk, colDim, colAccent;
+  function readColors() { colInk = css("--ink"); colDim = css("--dot-dim"); colAccent = css("--accent"); }
+  readColors();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", readColors);
+
+  // Geometry (canvas units): substrate, n+ source/drain, oxide, gate, contacts
+  const sub = { x: 40, y: 230, w: 960, h: 170 };
+  const src = { x: 120, y: 230, w: 230, h: 70 };
+  const drn = { x: 690, y: 230, w: 230, h: 70 };
+  const ox  = { x: 330, y: 214, w: 380, h: 14 };
+  const gate = { x: 340, y: 120, w: 360, h: 92 };
+  const label = { x: 440, y: 356, w: 160, h: 34 };
+  const inside = (r, x, y) => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h;
+  // Hash-based dither so the drawing looks stippled but stays stable frame to frame
+  const hash = (x, y) => { let h = (x * 374761393 + y * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
+
+  const dots = [];
+  for (let y = S / 2; y < H; y += S) for (let x = S / 2; x < W; x += S) {
+    let kind = null, density = 0;
+    if (inside(gate, x, y)) { kind = "gate"; density = 0.85; }
+    else if (inside(ox, x, y)) { kind = "ox"; density = 0.35; }
+    else if (inside(src, x, y) || inside(drn, x, y)) { kind = "n"; density = 0.75; }
+    else if (inside(sub, x, y)) { kind = "sub"; density = 0.22 + 0.18 * ((y - sub.y) / sub.h); }
+    if (inside(label, x, y)) kind = null;
+    if (kind && hash(x, y) < density) dots.push({ x, y, kind });
+  }
+  // Contacts (metal pillars) above source, drain
+  const pillars = [{ x: 220, top: 150, bottom: 230 }, { x: 800, top: 150, bottom: 230 }, { x: 520, top: 70, bottom: 120 }];
+
+  // Electrons: travel along the channel just under the oxide, then down into the drain
+  const N = 46, electrons = [];
+  for (let i = 0; i < N; i++) electrons.push({ t: i / N, lane: hash(i, 7) });
+  let running = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let gateOn = true, last = 0, phase = 0, hover = 0;
+
+  function electronPos(e) {
+    // path: from inside source (x 180..350) → channel (350..690) → into drain (690..860)
+    const x = 180 + e.t * 680;
+    const depth = 236 + e.lane * 14; // thin inversion layer right under the oxide
+    const y = (x < 350 || x > 690) ? 246 + e.lane * 40 : depth;
+    return [x, y];
+  }
+
+  function draw(now) {
+    const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    const speed = (gateOn ? 0.09 : 0) * (1 + hover * 1.4);
+    if (running) { phase += dt; electrons.forEach(e => { e.t += speed * dt; if (e.t > 1) e.t -= 1; }); }
+
+    ctx.clearRect(0, 0, W, H);
+    for (const d of dots) {
+      let c = colDim, r = 2.2;
+      if (d.kind === "gate") { c = gateOn ? colInk : colDim; r = 2.6; }
+      if (d.kind === "n") { c = colInk; r = 2.4; }
+      ctx.fillStyle = c; ctx.beginPath(); ctx.arc(d.x, d.y, r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.fillStyle = colInk;
+    for (const p of pillars) for (let y = p.top; y < p.bottom; y += S) { ctx.beginPath(); ctx.arc(p.x, y, 2.4, 0, Math.PI * 2); ctx.fill(); }
+
+    if (gateOn) {
+      for (const e of electrons) {
+        const [x, y] = electronPos(e);
+        const flick = running ? 0.6 + 0.4 * Math.sin(phase * 6 + e.lane * 20) : 1;
+        ctx.globalAlpha = flick; ctx.fillStyle = colAccent;
+        ctx.beginPath(); ctx.arc(x, y, 3.6, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.fillStyle = colInk; ctx.font = "500 22px JetBrains Mono, monospace"; ctx.textAlign = "center";
+    ctx.fillText("S", 220, 140); ctx.fillText("D", 800, 140); ctx.fillText("G", 520, 60);
+    ctx.fillStyle = colDim; ctx.font = "18px JetBrains Mono, monospace";
+    ctx.fillText("p-substrate", 520, 380);
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  cv.addEventListener("pointermove", () => { hover = 1; });
+  cv.addEventListener("pointerleave", () => { hover = 0; });
+  cv.addEventListener("click", () => toggleGate());
+
+  function toggleGate() {
+    gateOn = !gateOn;
+    $("gate").textContent = gateOn ? "turn gate off" : "turn gate on";
+    $("legend").innerHTML = gateOn
+      ? "V<sub>GS</sub> &gt; V<sub>TH</sub> · electrons flowing source → drain"
+      : "V<sub>GS</sub> &lt; V<sub>TH</sub> · cutoff, no channel";
+  }
+  $("gate").addEventListener("click", toggleGate);
+  $("pause").addEventListener("click", () => { running = !running; $("pause").textContent = running ? "pause animation" : "play animation"; });
+  if (!running) $("pause").textContent = "play animation";
+
+  // ---- Background: PCB-style traces with light pulses travelling like data on a bus ----
+  const tc = $("traces"), tx = tc.getContext("2d");
+  let traces = [], TW = 0, TH = 0, tLast = 0;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  function buildTraces() {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    TW = innerWidth; TH = innerHeight;
+    tc.width = TW * dpr; tc.height = TH * dpr; tx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.round(Math.max(3, Math.min(8, (TW * TH) / 170000)));
+    traces = [];
+    for (let i = 0; i < count; i++) {
+      const fromLeft = i % 2 === 0;
+      let x = fromLeft ? -10 : TW + 10, y = rnd(0.05, 0.95) * TH;
+      const dx = fromLeft ? 1 : -1;
+      const pts = [[x, y]];
+      let guard = 0;
+      while ((fromLeft ? x < TW + 10 : x > -10) && guard++ < 20) {
+        x += dx * rnd(60, 240); pts.push([x, y]);
+        const jog = rnd(18, 70) * (Math.random() < 0.5 ? -1 : 1);
+        if (y + jog > 10 && y + jog < TH - 10) { x += dx * Math.abs(jog); y += jog; pts.push([x, y]); }
+      }
+      const lens = []; let total = 0;
+      for (let k = 1; k < pts.length; k++) { const l = Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]); lens.push(l); total += l; }
+      traces.push({ pts, lens, total, s: -rnd(0, total), speed: rnd(260, 520), tail: rnd(90, 170) });
+    }
+  }
+  function pointAt(t, d) {
+    if (d <= 0) return t.pts[0];
+    for (let k = 0; k < t.lens.length; k++) {
+      if (d <= t.lens[k]) { const a = t.pts[k], b = t.pts[k + 1], f = d / t.lens[k]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]; }
+      d -= t.lens[k];
+    }
+    return t.pts[t.pts.length - 1];
+  }
+  function drawTraces(now) {
+    const dt = Math.min(0.05, (now - tLast) / 1000 || 0); tLast = now;
+    const accent = css("--accent"), faint = css("--pattern");
+    tx.clearRect(0, 0, TW, TH);
+    tx.lineWidth = 1; tx.strokeStyle = faint; tx.lineJoin = "round"; tx.globalAlpha = 0.6;
+    for (const t of traces) {
+      tx.beginPath(); t.pts.forEach(([x, y], k) => k ? tx.lineTo(x, y) : tx.moveTo(x, y)); tx.stroke();
+      for (let k = 1; k < t.pts.length - 1; k++) { tx.beginPath(); tx.arc(t.pts[k][0], t.pts[k][1], 2.2, 0, Math.PI * 2); tx.fillStyle = faint; tx.fill(); }
+    }
+    tx.globalAlpha = 1;
+    for (const t of traces) {
+      if (running) { t.s += t.speed * dt; if (t.s - t.tail > t.total) { t.s = -rnd(0, t.total * 1.2); t.speed = rnd(260, 520); } }
+      if (t.s <= 0) continue;
+      const steps = 18;
+      tx.lineCap = "round";
+      for (let j = 0; j < steps; j++) {
+        const d0 = t.s - t.tail * (1 - j / steps), d1 = t.s - t.tail * (1 - (j + 1) / steps);
+        if (d1 < 0 || d0 > t.total) continue;
+        const a = pointAt(t, Math.max(0, d0)), b = pointAt(t, Math.min(t.total, d1));
+        tx.globalAlpha = Math.pow((j + 1) / steps, 2) * 0.9;
+        tx.strokeStyle = accent; tx.lineWidth = 2.2;
+        tx.beginPath(); tx.moveTo(a[0], a[1]); tx.lineTo(b[0], b[1]); tx.stroke();
+      }
+      if (t.s < t.total) {
+        const h = pointAt(t, t.s);
+        tx.globalAlpha = 1; tx.shadowColor = accent; tx.shadowBlur = 14; tx.fillStyle = accent;
+        tx.beginPath(); tx.arc(h[0], h[1], 2.8, 0, Math.PI * 2); tx.fill();
+        tx.shadowBlur = 0;
+      }
+      tx.globalAlpha = 1;
+    }
+    requestAnimationFrame(drawTraces);
+  }
+  buildTraces();
+  let rT; addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(buildTraces, 150); });
+  requestAnimationFrame(drawTraces);
+</script>
+
+</body>
+</html>
