@@ -196,10 +196,12 @@
 <script>
   // ---- Updated by Claude each time a new video is published. ----
   const LATEST = {
-    series: "Silicon Art #7 ·",
-    title: "the CMOS inverter",
-    url: "https://www.linkedin.com/feed/update/urn:li:activity:7512717959061020672/",
-    art: "inverter"
+      "series": "Silicon Art #7 ·",
+      "title": "the CMOS Inverter",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7512717959061020672/",
+      "art": "inverter",
+      "thumb": "",
+      "platform": "LinkedIn"
   };
   const ICON = {
     linkedin: '<path d="M7 10.5V17M11 17v-6.5M11 13.4c0-1.7 1.2-2.9 2.8-2.9s2.7 1.1 2.7 3V17"/><circle cx="7" cy="7.4" r="1.25" fill="currentColor" stroke="none"/><rect x="2.5" y="2.5" width="19" height="19" rx="4"/>',
@@ -214,13 +216,24 @@
     ["GitHub", "github", "https://github.com/JesseHardingMurillo"]
   ];
   const ARCHIVE = [
-    ["#7", "The CMOS Inverter", "", "https://www.linkedin.com/feed/update/urn:li:activity:7512717959061020672/"],
-    ["#6", "Understanding MOSFET Operating Regions", "most watched", "https://www.linkedin.com/feed/update/urn:li:activity:7511650862704873472/"],
-    ["#5", "MOSFET: The Invention That Changed the World", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
-    ["#4", "Moore's Law", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
-    ["#3", "Inside an IC: FEOL, MOL & BEOL", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
-    ["#2", "From Sand to IC", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"],
-    ["#1", "What is a PDK?", "", "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"]
+      [
+          "#7",
+          "The CMOS Inverter",
+          "",
+          "https://www.linkedin.com/feed/update/urn:li:activity:7512717959061020672/"
+      ],
+      [
+          "#6",
+          "Understanding MOSFET Operating Regions",
+          "most watched",
+          "https://www.linkedin.com/feed/update/urn:li:activity:7511650862704873472/"
+      ],
+      [
+          "#1–5",
+          "PDK, Sand to IC, FEOL/MOL/BEOL, Moore's Law, the MOSFET",
+          "",
+          "https://www.linkedin.com/in/andres-harding-abb258199/recent-activity/all/"
+      ]
   ];
   // ----------------------------------------------------------------
 
@@ -245,7 +258,7 @@
   $("latest").href = LATEST.url;
   $("latest-series").textContent = LATEST.series;
   $("latest-title").textContent = LATEST.title;
-  $("thumb").innerHTML = THUMBS[LATEST.art] || THUMBS.inverter;
+  $("thumb").innerHTML = LATEST.thumb ? `<img src="${LATEST.thumb}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">` : (THUMBS[LATEST.art] || THUMBS.inverter);
   $("social").innerHTML = SOCIAL.map(([n, k, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg><span>${n}</span></a>`).join("");
   $("archive").innerHTML = ARCHIVE.map(([n, t, m, u]) =>
     `<li><a href="${u}" target="_blank" rel="noopener"><span class="n">${n}</span><span class="t">${t}</span><span class="m">${m}</span></a></li>`).join("");
